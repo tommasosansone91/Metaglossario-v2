@@ -1,1 +1,1 @@
-web: gunicorn Metaglossario_Gestisco.wsgi
+web: gunicorn Metaglossario_v2.wsgi
