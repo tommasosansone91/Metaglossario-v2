@@ -1,0 +1,122 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+    <h1>Aggiungi terminologia in massa</h1>
+
+    <br>
+
+    <p id="firstpar">
+        Questo tool serve ad inserire nuova terminologia nel <a href={% url "glossario" %}>glossario</a> del progetto GESTI.S.CO Interreg IT-CH.<br>
+        Il tool consente di inserire più record di terminologia alla volta, evitando così all'utente di compilare più volte il <a href={% url "aggiungi_terminologia" %}>form per l'aggiunta della terminologia</a>.
+        
+    </p>
+    <br>
+
+    <div class="container">
+    <p id="firstpar">
+        Per inserire più record alla volta:
+        <ol>
+            <li>Scaricare il template</li>
+            <li>Compilare il template come indicato dalle note presenti nel template stesso</li>
+            <li>Rinominare a piacere il template compilato</li>
+            <li>Caricare il template compilato.</li>
+        </ol>
+    </p>
+    </div>
+    
+
+
+    <br>
+
+    <!-- scarica template glossario -->    
+    <p>        
+    <form method="get" action="static/files_for_download/template_glossario.xlsx">
+    
+        <button type="submit" class="btn btn-success">Scarica template</button>
+    
+    </form>
+    </p>
+
+    <!-- <div class="container">   
+    <small id="inputHelp" class="form-text text-muted">NOTA: Non rinominare le colonne del template.</small>     
+    </div>   -->           
+    
+    <div class="container">     
+    <p id="firstpar" >
+    
+        <b>Non rinominare le colonne del template.</b><br>
+        Tutti i campi sono facoltativi.<br> <!--qua devo fare l'autogenerazione di id statico e data di inserimento-->
+        La terminologia inserita dagli utenti sarà soggetta a revisione da parte dell'amministratore del sito prima di essere mostrata nel glossario.<br>
+    
+    </p>
+    </div>
+
+    <br>   
+
+    <!-- carica glossario -->
+    <p>
+    <form method="POST" action="" enctype="multipart/form-data" >
+        {% csrf_token %}
+
+        <div class="file-upload-wrapper" id="input-file-now">
+
+            <small id="inputHelp" class="form-text text-muted">Seleziona il template compilato con la terminologia da caricare. <br>Non sono accettati i file maggiori di 5M.</small>                  
+            <input type="file"  name="Glossary_file" id="input-file-now" data-max-file-size="5M" class="file-upload">
+            
+            <br><br> 
+
+            <!-- entry della data è nascosto -->
+            <!-- in futuro posso rendere da forms.py il fatto che html non devono essere presi certi campi, quindi al posto di nasconderli tolgo proprio l'input. però devo far sì che nel modello si generino da soli se non specificati dall'utente -->
+            <div class="form-group">
+                <!-- <label for="glossary_entry_input_13">Data di inserimento della terminologia</label>
+                <small id="inputHelp" class="form-text text-muted">Compilare solo se è nota la data di pubblicazione del documento fonte, altrimenti inserire la data di oggi.</small>-->
+                 <input name="Data_inserimento_glossary" type="hidden" class="form-control" id="mettici_data_di_oggi">              
+            </div>
+            <!-- la data funziona - ho controllato -->
+  
+            <div class="container">
+                <button type="submit" class="btn btn-primary">Carica glossario</button>
+            </div>
+        </div>
+
+    </form>
+    </p>
+
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- Django tag load static -->
+{% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+<!-- perchè??? -->
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href={% static "css/searchbar_style.css" %}>
+<link rel="stylesheet" type="text/css" href={% static "css/upload_glossary_slot.css" %}>
+
+<!-- Javascript -->
+<script type="text/javascript" src={% static "js/data_oggi.js" %}> </script> 
+<script> attualizza_data_di_ID("mettici_data_di_oggi") </script> 
+
+<!-- <script> document.getElementById("mettici_data_di_oggi").value = 15-03-1991; </script>  -->
+<!-- se ci mettevo questo andava in conflitto con quello sopra -->
+
+<!-- il formato della data deve essere aaaa-mm-dd su django -->
+
+<!-- <script type="text/javascript" src={% static "js/prova.js" %}></script>
+<script> funprova() </script>  -->
+
+<!-- Javascript -->
+<!-- <script type="text/javascript" src={% static "js/drag_and_drop_glossario.js" %}></script> --> 
+<!-- <!-- <script> drag_and_drop_glossario() </script>  -->
+<!-- script caricato ma non runnato -->
+
+{% endblock %}

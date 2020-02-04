@@ -1,0 +1,70 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+    <h1>Istruzioni per l'uso</h1>
+    
+    <br>
+
+<h4>Glossario</h4>
+
+<p>In questa pagina la terminologia presente nel database viene mostrata in forma di semplice glossario.</p>
+<p>Ogni riquadro riporta un set di informazioni inserite nel database dall’amministratore o dagli utenti. Gli elementi sono ordinati alfabeticamente secondo i lemmi.</p>
+<p>La barra di ricerca consente di cercare una stringa di testo in tutti i campi del database.</p>
+<p>Questo strumento è pensato per visionare la terminologia in maniera semplice ed è ottimizzato per essere utilizzato durante le attività di emergenza.<p>
+
+<br>
+
+<h4>Metaglossario</h4>
+
+<p>In questa pagina la terminologia presente nel database viene mostrata in forma di metaglossario, ossia, per ogni elemento della terminologia vengono mostrati tutti gli elementi collegati, secondo la struttura relazionale.</p>
+<p>Ogni riga mostra una diversa combinazione di dati e metadati. Gli elementi sono ordinati alfabeticamente secondo i lemmi.</p><p>La barra di ricerca consente di cercare una stringa di testo in tutti i campi del database.</p>
+<p>La terminologia è inoltre navigabile in maniera libera e intuitiva: basta cliccare su un elemento per visionare tutti gli altri elementi collegati ad esso.</p>
+<p>Questo strumento è pensato per visionare la terminologia in maniera analitica ed è pensato per essere utilizzato soprattutto durante le attività di pianificazione di emergenza.<p>
+
+<br>
+
+<h4>Aggiungi terminologia</h4>
+
+<p>A questa pagina è possibile suggerire l’aggiunta di nuova terminologia nel database.</p>
+<p>Un apposito form consente di inserire una voce di terminologia alla volta.</p>
+<p>La terminologia inserita dagli utenti sarà soggetta a revisione da parte dell'amministratore del sito prima di essere mostrata nel glossario e nel metaglossario.</p>
+
+<br>
+
+<h4>Aggiungi terminologia in massa</h4>
+
+<p>A questa pagina è possibile suggerire l’aggiunta di nuova terminologia nel database.</p>
+<p>Un apposito fileform consente di inserire più voci di terminologia alla volta, oppure di un intero glossario.</p>
+<p>Per inserire la nuova terminologia con questo strumento è necessario scaricare un foglio elettronico, compilarlo come indicato e poi ricaricarlo utilizzando l’apposito fileform.</p>
+<p>La terminologia inserita dagli utenti sarà soggetta a revisione da parte dell'amministratore del sito prima di essere mostrata nel glossario e nel metaglossario.<p>
+
+<br>
+
+<h4>Esporta terminologia</h4>
+
+<p>Da questa pagina è possibile esportare la terminologia presente nel database, sia attraverso il download diretto di un foglio elettronico, sia attraverso un servizio di API in formato JSON.</p>
+<p>L’esportazione della terminologia tramite API costituisce modalità di condivisione in linked data, garantendo così l’aggiornamento in tempo reale delle informazioni dal database sorgente.</p>
+
+
+
+
+
+ 
+
+
+    
+    {% comment %} fai tutorial video per ogni paragrafo {% endcomment %}
+
+    
+
+
+{% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href={% static "css/about_style.css" %}>
+
+<!-- Javascript -->
+{% comment %} <script type="text/javascript" src={% static "js/file.js" %}></script> {% endcomment %}
+
+{% endblock %}

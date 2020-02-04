@@ -1,0 +1,47 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+{% load static %} 
+
+    <h1>Che cos'è un metaglossario</h1>
+    
+    <br>
+
+    <p>dal gr. 'meta' = «con, dopo» + 'glossario', letteralmente, 'un glossario che, per le sue caratteristiche, rappresenta qualcosa di più elaborato di un normale glossario'.</p>
+        
+    <p>In particolare, si tratta di un glossario che raccoglie lemmi, definizioni e altre informazioni provenienti da altri glossari o comunque da diverse fonti.<br>    
+    Per tale ragione un metaglossario generalmente possiede un corredo di metadati che indica la provenienza o l'autore di ogni tupla di elementi (lemma + definizione + acronimo, ecc.).</p> 
+
+    <p>Secondo il concetto espresso nella pubblicazione <a href="http://www.aracneeditrice.it/index.php/estratto.html?item=10.4399/97888255172175&isbn=9788825517217" target="_blank">"Strumenti per un metaglossario della Protezione civile in Italia"</a>, un metaglossario è da intendersi sia come l'insieme delle informazioni estratte da più glossari, sia come la struttura relazionale che collega e ordina tali informazioni. Allo stesso modo può essere inteso sia come una piattaforma per la rappresentazione e l'interrogazione grafica di tali informazioni, sia come una piattaforma per la condivisione di tali informazioni, dalla quale sia possibile estrarre dei subset di dati e pubblicarli su altre piattaforme mantenendoli costantemente aggiornati tramite la condivisione in modalità linked-data.</p>
+    
+    <br>
+
+    <div style="text-align:center">
+        <img src="{% static 'img/info_SR_platform.png' %}" style="width:60%;" align="middle" alt="Area transfrontaliera interessata dal progetto Gestisco" >
+    </div>
+
+    <br> 
+
+    <p>Tale piattaforma consente quindi di integrare la base di dati del metaglossario con quelle di altri progetti di glossari condivisi tramite linked data. Attraverso la stessa piattaforma un utente può attingere alla terminologia della base di dati ed eventualmente aggiungere la propria terminologia per generare un glossario personalizzato. Tramite un file di sistema, la piattaforma è in grado di registrare le modalità con cui l'utente utilizza e aggrega il linguaggio messo a disposizione, rendendone possibile l'analisi e lo studio.</p>
+
+    <br>
+
+    <div style="text-align:center">
+        <img src="{% static 'img/piattaforma_metaglossario.png' %}" style="width:50%;" align="middle" alt="Area transfrontaliera interessata dal progetto Gestisco" >
+    </div>   
+
+    
+
+
+    
+
+
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href={% static "css/about_style.css" %}>
+
+<!-- Javascript -->
+{% comment %} <script type="text/javascript" src={% static "js/file.js" %}></script> {% endcomment %}
+
+{% endblock %}

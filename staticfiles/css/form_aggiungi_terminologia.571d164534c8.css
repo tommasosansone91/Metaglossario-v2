@@ -1,0 +1,18 @@
+/* devo ancora capire come farlo
+voglio fare una cosa che mi metta da una parte i campi per le fonti italiane, dall'altra quelle delle fonti svizzere */
+
+/* splitta la pagina in blocchi e allienali */
+/* https://stackoverflow.com/questions/38275925/how-to-align-two-columns-in-html */
+
+/* definire due classi che sono la replica della form-group e applicare alle altre
+ lo styling
+ 
+ per l'italia:
+ display:inline-block; width:48%;
+
+ per la svizzera:
+  width:48%; float: right;" 
+  
+  */
+
+

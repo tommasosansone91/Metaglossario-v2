@@ -1,0 +1,268 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+<h1>Metaglossario</h1>
+
+<br>
+
+    <!-- Barra di navigazione  -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- questo fa apparire il pulsantino di ricerca -->
+    <!-- questo fa apparire il pulsantino di ricerca -->
+
+    <div class="topnav">
+        
+        <a id="pulsante_ricerca_avanzata" href="#Ricerca_avanzata" onclick="alert('Funzione non ancora disponibile.')">Ricerca avanzata</a>
+        
+        <!-- vai all'indice -->
+        {% comment %} <a id="goto_index_button" href="{% url 'indice_glossario' %}"><i class="fa fa-list-ul" aria-hidden="true"></i></a> {% endcomment %}
+            
+
+        <div id="blocco_ricerca_semplice" class="search-container">
+
+          <form method="GET" action="{% url 'metaglossario' %}">
+            
+            <input id="testo_slot_ricerca_semplice"  type="text" placeholder="Ricerca terminologia..." name="like_term" value="{{request.GET.like_term}}">  <!-- è il nome che ho dato anche nella views.py -->
+            <!-- name dentro input text vuol dire il sintagma che viene dato all'url di tutte le query, seguito da un = per indicarne il bersaglio'  -->
+            
+            
+
+            <!-- #cerca -->
+            <button id="search_button" type="submit"><i class="fa fa-search"></i></button>
+
+            
+            <!-- cancella like_term_query -->
+            <button id="cancel_search_button" type="submit" onclick="Delete_simple_search()"><i class="fa fa-trash"></i></button>
+            
+            
+           
+
+          </form>
+
+          
+        </div>
+
+    </div>
+
+
+    <br>
+<!--  show tabella  -->
+
+
+
+{% if queryresult_key %}
+
+<br>
+
+    <table>
+
+        <tr style="font-weight: bold; text-align: center;">
+
+            <td id="Lemma_cell" class="class_Tabella_Head">Lemma</td>
+            <td id="Acronimo_cell" class="class_Tabella_Head">Acronimo</td>
+            <td id="Definizione_cell" class="class_Tabella_Head">Definizione</td>
+            <td id="Titolo_documento_fonte_cell" class="class_Tabella_Head">Titolo documento fonte</td>
+            <td id="Url_documento_fonte_cell" class="class_Tabella_Head">URL documento fonte</td>
+
+        </tr>
+
+    {% for row in queryresult_key %}
+
+        <tr>        
+
+            <td id="Lemma_cell" class="class_Tabella_Risultati">{{ row.0 }}</td>
+            <td id="Acronimo_cell" class="class_Tabella_Risultati">{{ row.1 }}</td>
+            <td id="Definizione_cell" class="class_Tabella_Risultati">{{ row.2 }}</td>
+            <td id="Titolo_documento_fonte_cell" class="class_Tabella_Risultati">{{ row.3 }}</td>
+            <td id="Url_documento_fonte_cell" class="class_Tabella_Risultati">{{ row.4 }}</td>
+        
+        </tr>
+
+    {% endfor %}
+
+    </table>
+
+
+
+{% else %}
+
+
+    {% if len_result_list_key == 0 %} <!-- se non c'è niente nella lista dei risultati -->
+
+    <p class="class_expect_query" style="font-size: 26px"><b>Nessun risultato</b></p>
+    <p class="class_expect_query">Eliminare eventuali apostrofi e altri caratteri speciali dai termini di ricerca.</p>
+
+
+    {% else %}
+
+    <p class="class_expect_query">ERRORE: query non inserita!</p>
+
+    {% endif %}
+
+
+{% endif %}
+
+
+{% comment %} PAGINATORE {% endcomment %}
+
+    <br><br> <!-- spazio dopo i risultati impaginati -->       
+
+    <div class="navigation" id="navigation_box">
+    <!-- navigation è una classe inventata -->
+
+        <nav aria-label="...">
+            <ul class="pagination">
+                
+            <!-- Se la like term ha ricevuto un input = la search bar ha inserito input -->    
+            {% if like_term_query %}
+                                
+                {% if queryresult_key.has_previous %}
+                
+                    <li class="page-item">
+                        <a class="page-link" href="?like_term={{ like_term_query }}&page=1">&laquo; Prima pagina</a> 
+                    </li>
+                        
+                    <li class="page-item">
+                        <a class="page-link" href="?like_term={{ like_term_query }}&page={{ queryresult_key.previous_page_number }}">{{ queryresult_key.previous_page_number }}</a>
+                    </li>
+
+                {% else %}
+
+                    <li class="page-item disabled" >
+                        <a  class="page-link" href="#" id="tasto_navigazione_pagina_disabilitato" class="page-item disabled">&laquo; Prima pagina</a>  
+                    </li>
+
+                {% endif %}
+
+
+                <li class="page-item active">
+                <a class="page-link" id="active_page_sign" href="#">{{ queryresult_key.number }}<span class="sr-only">(current)</span></a>
+                </li>
+
+
+                {% if queryresult_key.has_next %}
+                    
+                    <li class="page-item">
+                        <a class="page-link" href="?like_term={{ like_term_query }}&page={{ queryresult_key.next_page_number }}">{{ queryresult_key.next_page_number }}</a>
+                    </li>
+
+                    <li class="page-item">
+                        <a class="page-link" href="?like_term={{ like_term_query }}&page={{ queryresult_key.paginator.num_pages }}">Ultima pagina [ {{ queryresult_key.paginator.num_pages }} ] &raquo;</a> 
+                    </li>
+
+                {% else %}
+
+                    <li class="page-item disabled" >
+                    <a class="page-link" href="#" id="tasto_navigazione_pagina_disabilitato" class="page-item disabled">Ultima pagina [ {{ queryresult_key.paginator.num_pages }} ] &raquo;</a>  
+                    </li> 
+                
+                {% endif %}
+
+        <!-- Se la q è vuota = la search bar non ha inserito input -->
+        {% else %}
+
+        
+            {% if queryresult_key.has_previous %}
+                        
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">&laquo; Prima pagina</a> 
+                </li>
+                    
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ queryresult_key.previous_page_number }}">{{ queryresult_key.previous_page_number }}</a>
+                </li>
+
+            {% else %}
+
+                <li class="page-item disabled"  >
+                    <a class="page-link" href="#" id="tasto_navigazione_pagina_disabilitato" class="page-item disabled">&laquo; Prima pagina</a>  
+                </li> 
+
+            {% endif %}
+
+
+            <li class="page-item active">
+            <a class="page-link" id="active_page_sign" href="#">{{ queryresult_key.number }}<span class="sr-only">(current)</span></a>
+            </li>
+
+
+            {% if queryresult_key.has_next %}
+                
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ queryresult_key.next_page_number }}">{{ queryresult_key.next_page_number }}</a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ queryresult_key.paginator.num_pages }}">Ultima pagina [ {{ queryresult_key.paginator.num_pages }} ] &raquo;</a> 
+                </li>
+
+            {% else %} 
+
+                <li class="page-item disabled"  >
+                <a class="page-link" href="#" id="tasto_navigazione_pagina_disabilitato" class="page-item disabled">Ultima pagina [ {{ queryresult_key.paginator.num_pages }} ] &raquo;</a>  
+                </li> 
+            
+            {% endif %}
+
+
+        {% endif %}
+
+            </ul>
+        </nav>
+
+
+
+        <!-- navigatore di paginazione manuale -->
+        
+        {% if like_term_query %}
+
+            <form method="GET" >
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                        
+                        <li class="page-item disabled" ><a id="vai_alla_pagina_disabilitato" class="page-link" >Vai alla pagina: </a></li>
+                        <li class="hidden"><input type="hidden" name="like_term" value="{{request.GET.like_term}}"></li>
+                        <li class="page-item"><input id="page_slot" style="width: 60px" class="page-link" name="page"></li>                    
+                        <li class="page-item">&nbsp&nbsp&nbsp<button type="submit" class="btn btn-primary" href="?like_term={{like_term_query}}&page={{page}}">Vai</button></li>
+                        </ul>
+                        
+                    </nav>
+                </form>
+
+        {% else %}
+
+        <!-- se la like_term_query è vuota questo funziona -->
+
+            <form method="GET" action="{% url 'metaglossario' %}">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                        
+                        <li class="page-item disabled" ><a id="vai_alla_pagina_disabilitato" class="page-link" >Vai alla pagina: </a></li>
+                        <li class="page-item" ><input style="width: 60px; color:grey" class="page-link" name="page" value=""></li>
+                        <li class="page-item">&nbsp&nbsp&nbsp<button type="submit" class="btn btn-primary">Vai</button></li>
+                        </ul>
+                        
+                    </nav>
+                </form>
+
+            
+        {% endif %}
+
+    </div>       
+
+
+
+
+    
+{% load static %}
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="{% static "css/metaglossario_style.css" %}">
+<link rel="stylesheet" type="text/css" href={% static "css/searchbar_style.css" %}>
+<link rel="stylesheet" type="text/css" href={% static "css/pagination_box_style.css" %}>
+
+<!-- Javascript -->
+<script type="text/javascript" src={% static "js/delete_simple_search.js" %}></script>
+<!-- script caricato ma non runnato -->    
+
+{% endblock %}

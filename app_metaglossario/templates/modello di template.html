@@ -1,0 +1,23 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+    <h1>Titolo</h1>
+    
+    <br>
+
+    
+
+
+    
+
+
+{% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+<!-- CSS -->
+{% comment %} <link rel="stylesheet" type="text/css" href={% static "css/file.css" %}> {% endcomment %}
+
+<!-- Javascript -->
+{% comment %} <script type="text/javascript" src={% static "js/file.js" %}></script> {% endcomment %}
+
+{% endblock %}

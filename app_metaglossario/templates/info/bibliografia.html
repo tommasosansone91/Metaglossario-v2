@@ -1,0 +1,33 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+    <h1>Bibliografia</h1>
+    
+    <br>
+
+    <p><a id="elemento_bibliografia" href='http://presentations.copernicus.org/EGU2019-18895_presentation.pptx' target='_blank'>Daniele Bignami, Giovanni Menduni, and Tommaso Sansone, "Semantic web tools for risk management and communication in emergency", Earth and Geoscience Union general assembly, Vienna, 2019.</a></p>
+
+    <p><a id="elemento_bibliografia" href='http://www.aracneeditrice.it/index.php/estratto.html?item=10.4399/97888255172175&isbn=9788825517217' target='_blank'>Menduni, Giovanni, et al. "Strumenti per un metaglossario della Protezione civile in Italia", AIDA informazioni. Rivista di scienze dell'informazione, 36 (2018), n. 1-2, p. 67-88.</a></p>
+
+    <p><a id="elemento_bibliografia" href='https://drive.google.com/file/d/1-iZpdcQ-C8pREzEWCx7d5Ew7MbpaRscr/view?usp=sharing' target='_blank'>Menduni, Giovanni, et al. "Strumenti per un metaglossario della protezione civile in Italia.", XXVIII Convegno Internazionale Ass.I.Term, Salerno, 2018.</a></p>
+
+    <p><a id="elemento_bibliografia" href='https://drive.google.com/file/d/1IZoc5LocBUBpaWxax9BwcXdukZrJdilG/view?usp=sharing' target='_blank'>Sansone, Tommaso Leopoldo. "Web semantico e rischi naturali: un metaglossario dei temi del rischio idrogeologico e della Protezione Civile." (2017).  – [pdf]</a></p>
+
+    <p><a id="elemento_bibliografia" href='https://drive.google.com/file/d/13AVuH_Qbg-FXzH1nbfNkkCx9weveH_UM/view?usp=sharing' target='_blank'>SANSONE, Tommaso Leopoldo. "Web semantico e rischi naturali: un metaglossario dei temi del rischio idrogeologico e della Protezione Civile." (2017).  – [epub]</a></p>
+
+        
+
+
+    
+
+
+{% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href={% static "css/about_style.css" %}>
+
+<!-- Javascript -->
+{% comment %} <script type="text/javascript" src={% static "js/file.js" %}></script> {% endcomment %}
+
+{% endblock %}

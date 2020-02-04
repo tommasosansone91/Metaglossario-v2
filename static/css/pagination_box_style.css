@@ -1,0 +1,70 @@
+/* è il rettangolone fuori */
+  #navigation_box { 
+    background-color: #e9e9e9;
+    border: 1px;
+    /* border-radius: 4px; */
+    padding:20px;
+  }
+
+
+/* regola i pulsanti attivabili della parte di sopra del navigatore */
+.pagination a {
+  color: black;
+  background-color: #ddd;
+  border-color: #ddd;
+}
+
+
+/* regola lo hover dei pulsanti attivabili della parte di sopra del navigatore */
+  .pagination a:hover {
+    color: white;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .pagination input {
+    background-color: #f8f8f8;   
+    color: black;
+  }
+
+  .pagination input:hover {
+    background-color: white; 
+    /* mettere borders 2 px qui dentro faceva saltare la linea successiva */
+    /* border-color: #007bffc4; */
+    color: black;
+    
+
+  }
+
+
+  .page-item button{
+    transition: 0s background-color;
+    background-color: #ddd;
+    color: black;
+    border-color: #ddd;
+  }
+
+  #active_page_sign{
+    border-color: rgb(165, 165, 165);
+    background-color: rgb(165, 165, 165);
+  }
+/* 
+  #tasto_navigazione_pagina_cliccabile{
+
+    color:
+
+  } */
+
+/* PULSANTI DISABILITATI DI NAVIGAZIONE PAGINA */
+#tasto_navigazione_pagina_disabilitato{
+  color:white;
+  border-color: rgb(165, 165, 165);
+  background-color: rgb(165, 165, 165);
+}
+
+#vai_alla_pagina_disabilitato{
+
+  background-color: #ddd;
+  color: black;
+  border-color: #ddd;
+}

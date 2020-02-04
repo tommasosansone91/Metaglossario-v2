@@ -1,0 +1,25 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+    <h1>Codice sorgente</h1>
+    
+    <br>
+
+    <p>Il codice sorgente di questa app è scaricabile da <a href="https://github.com/tommasosansone91/Metaglossario-Gestisco" target='_blank'> questa repository</a> di Github.</p>
+    
+    
+
+
+    
+
+
+{% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+<!-- CSS -->
+{% comment %} <link rel="stylesheet" type="text/css" href={% static "css/file.css" %}> {% endcomment %}
+
+<!-- Javascript -->
+{% comment %} <script type="text/javascript" src={% static "js/file.js" %}></script> {% endcomment %}
+
+{% endblock %}

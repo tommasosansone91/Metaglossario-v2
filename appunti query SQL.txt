@@ -1,0 +1,67 @@
+
+
+modificare nella linea del select metti il nome della tabella rinominata es titolo_doc_fonte
+nel fro, appena appare il nome della tabella che porta le things, model_things ma senza attributi.thing o.id thing, 
+inserisci AS e mettici il nome della tabella che hai usato nella linea del select.
+nella query, ogni volta che appare di nuovo quel model_things, sostituiscila col nuovo nome della tabella.
+
+
+  
+da access a django sql puro
+
+sostituisci model_ con app_metaglossario_model_
+
+per evitare confilitti nel like cambia " con '"
+
+cambia * con %
+
+
+sostituisci
+
+Like "%acq%" o "*acq*"
+
+con
+
+'%" + like_term_query + "%'
+
+
+i nomi delle tabelle e delle relazioni protrebbero cambiare
+
+ricerca in tutti i campi acq, metodo
+
+
+-----------------------------------------------------------------------
+
+versioni
+
+4 chain
+
+
+Query_initial_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing, Titolo_documento_fonte.Thing FROM (((app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing) INNER JOIN app_metaglossario_model_is_Titolo_documento_fonte_of ON Definizioni.ID_Thing = app_metaglossario_model_is_Titolo_documento_fonte_of.ID_oggetto) INNER JOIN app_metaglossario_model_Things AS Titolo_documento_fonte ON app_metaglossario_model_is_Titolo_documento_fonte_of.ID_soggetto = Titolo_documento_fonte.ID_Thing ORDER BY Lemmi.Thing;"  
+        
+
+Query_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing, Titolo_documento_fonte.Thing FROM (((app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing) INNER JOIN app_metaglossario_model_is_Titolo_documento_fonte_of ON Definizioni.ID_Thing = app_metaglossario_model_is_Titolo_documento_fonte_of.ID_oggetto) INNER JOIN app_metaglossario_model_Things AS Titolo_documento_fonte ON app_metaglossario_model_is_Titolo_documento_fonte_of.ID_soggetto = Titolo_documento_fonte.ID_Thing WHERE (( LOWER(Lemmi.Thing) Like LOWER('%" + like_term_query + "%') ) OR ((Acronimi.Thing) Like LOWER('%" + like_term_query + "%')) OR ( LOWER(Definizioni.Thing) Like LOWER('%" + like_term_query + "%') ) OR ( LOWER(Titolo_documento_fonte.Thing) Like LOWER('%" + like_term_query + "%') ) ) ORDER BY Lemmi.Thing;"  
+       
+
+così mi tira fuori solo la cosa,
+se invece nell aprima riga tolgo il .things ottengo la coppia di cosa e id che poi potrebbe servirmi
+altrimenti li chiamo, mettendoli dopo e con il template seleziono come farlo apparire
+
+..............................................
+
+versione 5 chain
+
+
+
+Query_initial_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing, Titolo_documento_fonte.Thing, Url_documento_fonte.Thing FROM app_metaglossario_model_Things AS Url_documento_fonte INNER JOIN (app_metaglossario_model_is_Url_documento_fonte_of INNER JOIN ((((app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing) INNER JOIN app_metaglossario_model_is_Titolo_documento_fonte_of ON Definizioni.ID_Thing = app_metaglossario_model_is_Titolo_documento_fonte_of.ID_oggetto) INNER JOIN app_metaglossario_model_Things AS Titolo_documento_fonte ON app_metaglossario_model_is_Titolo_documento_fonte_of.ID_soggetto = Titolo_documento_fonte.ID_Thing) ON app_metaglossario_model_is_Url_documento_fonte_of.ID_oggetto = Titolo_documento_fonte.ID_Thing) ON Url_documento_fonte.ID_Thing = app_metaglossario_model_is_Url_documento_fonte_of.ID_soggetto ORDER BY Lemmi.Thing;"     
+    
+
+Query_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing, Titolo_documento_fonte.Thing, Url_documento_fonte.Thing FROM app_metaglossario_model_Things AS Url_documento_fonte INNER JOIN (app_metaglossario_model_is_Url_documento_fonte_of INNER JOIN ((((app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing) INNER JOIN app_metaglossario_model_is_Titolo_documento_fonte_of ON Definizioni.ID_Thing = app_metaglossario_model_is_Titolo_documento_fonte_of.ID_oggetto) INNER JOIN app_metaglossario_model_Things AS Titolo_documento_fonte ON app_metaglossario_model_is_Titolo_documento_fonte_of.ID_soggetto = Titolo_documento_fonte.ID_Thing) ON app_metaglossario_model_is_Url_documento_fonte_of.ID_oggetto = Titolo_documento_fonte.ID_Thing) ON Url_documento_fonte.ID_Thing = app_metaglossario_model_is_Url_documento_fonte_of.ID_soggetto WHERE (((Lemmi.Thing) Like '%" + like_term_query + "%')) OR (((Acronimi.Thing) Like '%" + like_term_query + "%')) OR (((Definizioni.Thing) Like '%" + like_term_query + "%')) OR (((Titolo_documento_fonte.Thing) Like '%" + like_term_query + "%')) OR (((Url_documento_fonte.Thing) Like '%" + like_term_query + "%')) ORDER BY Lemmi.Thing;"     
+        
+
+------------------------
+
+versione 5 con lower: solo query filtrata
+
+
+Query_string = "SELECT Lemmi.Thing, Acronimi.Thing, Definizioni.Thing, Titolo_documento_fonte.Thing, Url_documento_fonte.Thing FROM app_metaglossario_model_Things AS Url_documento_fonte INNER JOIN (app_metaglossario_model_is_Url_documento_fonte_of INNER JOIN ((((app_metaglossario_model_is_Lemma_of INNER JOIN ((app_metaglossario_model_Things AS Acronimi INNER JOIN app_metaglossario_model_is_Acronimo_of ON Acronimi.ID_Thing = app_metaglossario_model_is_Acronimo_of.ID_soggetto) INNER JOIN app_metaglossario_model_Things AS Lemmi ON app_metaglossario_model_is_Acronimo_of.ID_oggetto = Lemmi.ID_Thing) ON app_metaglossario_model_is_Lemma_of.ID_soggetto = Lemmi.ID_Thing) INNER JOIN app_metaglossario_model_Things AS Definizioni ON app_metaglossario_model_is_Lemma_of.ID_oggetto = Definizioni.ID_Thing) INNER JOIN app_metaglossario_model_is_Titolo_documento_fonte_of ON Definizioni.ID_Thing = app_metaglossario_model_is_Titolo_documento_fonte_of.ID_oggetto) INNER JOIN app_metaglossario_model_Things AS Titolo_documento_fonte ON app_metaglossario_model_is_Titolo_documento_fonte_of.ID_soggetto = Titolo_documento_fonte.ID_Thing) ON app_metaglossario_model_is_Url_documento_fonte_of.ID_oggetto = Titolo_documento_fonte.ID_Thing) ON Url_documento_fonte.ID_Thing = app_metaglossario_model_is_Url_documento_fonte_of.ID_soggetto WHERE (( LOWER(Lemmi.Thing) Like LOWER('%" + like_term_query + "%') ) OR ((Acronimi.Thing) Like LOWER('%" + like_term_query + "%')) OR ( LOWER(Definizioni.Thing) Like LOWER('%" + like_term_query + "%') ) OR ( LOWER(Titolo_documento_fonte.Thing) Like LOWER('%" + like_term_query + "%')) OR ( LOWER(Url_documento_fonte.Thing) Like LOWER('%" + like_term_query + "%') ) ) ORDER BY Lemmi.Thing;"     

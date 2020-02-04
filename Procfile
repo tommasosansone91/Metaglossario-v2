@@ -1,0 +1,1 @@
+web: gunicorn Metaglossario_Gestisco.wsgi

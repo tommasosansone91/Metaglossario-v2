@@ -1,0 +1,159 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+    <h1>Aggiungi terminologia</h1>
+    <br>
+    <p id="firstpar">
+        Questo form serve ad inserire nuova terminologia nel <a href={% url "glossario" %}>glossario</a> del progetto GESTI.S.CO Interreg IT-CH.<br>
+        Tutti i campi sono facoltativi.<br> <!--qua devo fare l'autogenerazione di id statico e data di inserimento-->
+        La terminologia inserita dagli utenti sarà soggetta a revisione da parte dell'amministratore del sito prima di essere mostrata nel glossario.<br>
+    </p>
+
+    <br>
+
+
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="glossary-form"></div>
+
+            <div class="form-group">
+                  <label for="glossary_entry_input_1">Lemma</label>
+                  <input name="Lemma" type="text" class="form-control" placeholder="">
+            </div>
+
+
+            <div class="form-group">
+                  <label for="glossary_entry_input_2">Acronimo</label>
+                  <small id="inputHelp" class="form-text text-muted">Sigla abbreviativa del Lemma. Nel caso in cui il lemma sia una grandezza fisica, inserire la lettera o il simbolo che la identifica.</small>
+                  <input name="Acronimo" type="text" class="form-control" placeholder="">
+            </div>
+
+
+            <div class="form-group" >
+                  <label for="glossary_entry_input_3">Definizione</label>
+                  <small id="inputHelp" class="form-text text-muted">Non inserire testo proveniente da due o più fonti diverse.</small>
+                  <textarea style="height:150px" name="Definizione" type="text" class="form-control" placeholder=""></textarea>
+            </div>
+
+
+            <!-- <div class="form-group">
+                  <label for="glossary_entry_input_4">Ambito di riferimento della definizione</label>
+                  <small id="inputHelp" class="form-text text-muted">Branca scientifica o ramo tecnico nella quale rientra il concetto che si vuole inserire. (es. Idraulica, idrologia, sismologia, ecc.)</small>-->
+                   <input name="Ambito_riferimento" type="hidden" class="form-control" placeholder="">
+            <!-- </div> -->
+
+
+            <div class="form-group">
+                    <label for="glossary_entry_input_5">Autore della definizione</label>
+                    <small id="inputHelp" class="form-text text-muted">Compilare solo se il testo della definizione riporta espressamente l'autore.</small>
+                    <input name="Autore_definizione" type="text" class="form-control" placeholder="">
+            </div>
+
+
+            <div class="form-group">
+                    <label for="glossary_entry_input_6">Posizione della definizione nel documento fonte</label>
+                    <small id="inputHelp" class="form-text text-muted">Riferimento che indichi dove è posizionata la definizione nel documento fonte.<br>Ad esempio il titolo del paragrafo, il numero di pagina, il numero di un elenco, per le leggi la sequenza [art, comma, lettera], il tempo di riproduzione se la fonte è un file audio o video, ecc.<br>Evitare informazioni generiche come "a metà documento", all'inizio", ecc.</small>
+                    <input name="Posizione_definizione" type="text" class="form-control" placeholder="">
+            </div>
+
+
+            <div class="form-group">
+                    <label for="glossary_entry_input_7">URL della definizione</label>
+                    <small id="inputHelp" class="form-text text-muted">URL che rimanda al punto in cui è posizionata la definizione nel documento fonte. <a href="https://en.wikipedia.org/wiki/Fragment_identifier#Examples" target="_blank">Esempio</a><br>Compilare solo se il documento fonte è caricato sul web e solo se la definizione è individuata da un <a href="https://en.wikipedia.org/wiki/Fragment_identifier" target="_blank" >fragment identifier</a></small>
+                    <input name="Url_definizione" type="url" class="form-control" placeholder="">
+            </div>
+
+
+            <div class="form-group">
+                   <label for="glossary_entry_input_8">Titolo del documento fonte</label>
+                   <input name="Titolo_documento_fonte" type="text" class="form-control" placeholder="">
+            </div>
+
+
+            <div class="form-group">
+                  <label for="glossary_entry_input_9">Autore del documento fonte</label>
+                  <small id="inputHelp" class="form-text text-muted">Compilare solo se il documento fonte riporta espressamente l'autore.</small>
+                  <input name="Autore_documento_fonte" type="text" class="form-control" placeholder="">
+            </div>
+
+
+            <div class="form-group">
+                  <label for="glossary_entry_input_10">Host del documento fonte</label>
+                  <small id="inputHelp" class="form-text text-muted">Soggetto che detiene il dominio del sito web su cui è caricato il documento fonte.<br>Ad esempio, per un glossario caricato sul sito https://www.polimi.it/, inserire Politecnico di Milano.</small>
+                  <input name="Host_documento_fonte" type="text" class="form-control" placeholder="">
+            </div>
+
+
+            <div class="form-group">
+                  <label for="glossary_entry_input_11">URL del documento fonte</label>
+                  <input name="Url_documento_fonte" type="url" class="form-control" placeholder="">
+            </div>
+
+
+            <div class="form-group">
+                  <label for="glossary_entry_input_12">Altro/commento</label>
+                  <small id="inputHelp" class="form-text text-muted">Inserire eventuali ulteriori informazioni sulla terminologia che si vuole inserire.<br>Le informazioni inserite in questo campo saranno visibili solo all'amministratore del sistema.</small>
+                  <textarea style="height:80px" name="Commento_entry"  type="text" class="form-control" placeholder=""></textarea>
+            </div>
+
+        <!-- faccio una funzione save che sovrascrive la normale funzione save per il salvataggio
+            del modello, in views.py, in modo tale che la data viene generata dalla funzione di vista e
+        poi subito salvata nel modello automaticamente senza passare dal form -->
+
+        <!-- Eventualmente in futuro posso nascondere il campo data alla vista del lettore -->
+
+        <div class="form-group">
+              <!-- <label for="glossary_entry_input_13">Data di inserimento della terminologia</label>
+              <small id="inputHelp" class="form-text text-muted">Compilare solo se è nota la data di pubblicazione del documento fonte, altrimenti inserire la data di oggi.</small>-->
+               <input name="Data_inserimento_entry" type="hidden" class="form-control" id="mettici_data_di_oggi" >
+        </div>
+
+
+        <div class="form-group">
+            <!-- <label type="hidden" for="glossary_entry_input_13">Id statico delle informazioni</label> -->
+            <input type="hidden" name="Id_statico_entry" value="ITCH00000" type="text" class="form-control" placeholder="">
+         </div>
+
+         <!-- interruttore che rende visibile o meno il contenuto inserito
+        nei form all'inizio lo setto autmaticamente su "hide" -->
+         <div class="form-group">
+                <!-- <label type="hidden" for="glossary_entry_input_14">Interruttore dell'admin</label> -->
+                <input type="hidden" name="Admin_approval_switch" value="hide" type="text" class="form-control" placeholder="">
+        </div>
+
+          <br><br><br>
+
+
+          <div class="form-button" style="display:inline-block;padding-left: 36%;">
+                <button type="submit" style="width: 300px;height: 60px;" class="btn btn-primary">Inserisci terminologia</button>
+          </div>
+
+
+    </form>
+
+    
+
+
+
+
+<!-- {% load static %} --> <!-- questa riga c'è già in base.html -->
+
+
+<!-- Javascript -->
+<script type="text/javascript" src={% static "js/data_oggi.js" %}> </script>
+<script> attualizza_data_di_ID("mettici_data_di_oggi") </script>
+
+
+<!-- <script type="text/javascript" src={% static "js/prova.js" %}></script>
+<script> funprova() </script>  -->
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href={% static "css/aggiungi_terminologia_style.css" %}>
+
+
+
+
+{% endblock %}

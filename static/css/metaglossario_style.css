@@ -1,0 +1,57 @@
+.class_expect_query{
+    color: red;
+  }
+
+  
+.class_Tabella_Risultati{
+      background-color: #bdf2fc;
+      border: 5px solid white;
+
+      padding: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+      /* #acff99; #bbfcad; */
+  }
+
+.class_Tabella_Head{
+    background-color: white;
+    font-size: 18px;
+    border: 3px solid white;
+    
+}
+
+.class_Tabella_Risultati:hover { 
+  background-color: #48fd57;
+  /* color:white; */
+  /* cursor: pointer;  se metto il link sui riquadri dovrebbe attivarsi il cursore direttamente */
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+#Lemma_cell{
+  width: 13%;
+  word-wrap:break-word;
+}
+
+#Acronimo_cell{
+  width: 8%;
+  word-wrap:break-word;
+}
+
+#Definizione_cell{
+  width: 50%; 
+  word-wrap:break-word;
+}
+
+#Titolo_documento_fonte_cell{
+  width: 14%;
+  word-wrap:break-word;
+}
+
+#Url_documento_fonte_cell{
+  width: 15%;
+  word-wrap:break-word;
+}

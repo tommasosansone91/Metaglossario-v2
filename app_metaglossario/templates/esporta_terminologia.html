@@ -1,0 +1,64 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+    <h1>Esporta terminologia</h1>
+    
+    <br>
+
+    <h4>Esporta terminologia tramite API</h3>  
+    
+    <p>Il metaglossario del progetto Gestisco dispone di servizi API in stile REST che permettono ad altre applicazioni o script di accedere alla terminologia. Il servizio permette l'accesso alla terminologia desiderata attraverso un paradigma di URL statico e illustrato di seguito. Eventuali errori nell'utilizzo delle API vengono segnalati attraverso codici di risposta HTTP. Per tutte le richieste e le risposte dall'API viene utilizzato il formato JSON.</p>
+
+    
+
+
+    <form action="{% url 'api_glossario' %}" target="_blank">
+        <button type="submit" class="btn btn-primary" title="Il caricamento della pagina può richiedere alcuni minuti.">Visualizza JSON dell'intero glossario</button>
+        <!-- <small id="inputHelp" class="form-text text-muted"></small> -->
+    </form>
+
+    
+
+    <!-- <h4>Paradigma API</h4> 
+    <p>uno per il glossario intero, uno per la singola risorsa, una per gruppi di risorse raccolti da url.</p>
+    <p>magari posso implementare un codice biunivoco tra url e queryset</p> -->
+
+    <!-- https://www.breeze.pm/api -->
+
+    <!-- onclick="popup_tempo_api_glossario()"  -->
+
+    <!-- <div class="container">
+    <button type="button" href="{% url 'glossario' %}" class="btn btn-primary">Visualizza intero glossario</button>
+    </div>         -->
+
+    {% comment %} <h4>Esportazione di terminologia tramite download</h4> {% endcomment %}
+
+    {% comment %} https://drive.google.com/file/d/1PoWBaJW_YQ_cJ3WnZX5dupPLQLW8Y_YG/view?usp=sharing {% endcomment %}
+
+    <br><br>
+
+    <h4>Esporta terminologia tramite foglio elettronico</h3>  
+
+    <p>È possibile scaricare la terminologia in un foglio elettronico.</p>
+
+    <!-- scarica template glossario -->    
+    <p>        
+    <form method="get" action="static/saved_dataframes/Terminologia_metaglossario.xlsx"  >
+    
+        <button type="submit" class="btn btn-success">Scarica foglio elettronico</button>
+    
+    </form>
+    </p>
+
+ 
+
+
+{% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+<!-- CSS -->
+
+<!-- Javascript -->
+<script type="text/javascript" src={% static "js/popup_alert.js" %}></script>
+
+{% endblock %}

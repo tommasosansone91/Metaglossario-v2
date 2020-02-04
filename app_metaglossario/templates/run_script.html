@@ -1,0 +1,30 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+<h1>Questa è una pagina temporanea per il lancio degli script</h1>
+
+<br>
+
+<h3 id="script_status" style="color:rgb(17, 216, 116)">Script eseguito senza errori!</h3>
+
+<br>
+
+
+<p>Controlla sulla console lo script eseguito.</p>
+<p>cambia la funzione da eseguire dalla view run_script in views.py</p>
+<p>Attenzione a runnare lo script da locale (http://127.0.0.1:8000/)</p>
+
+
+ 
+
+{% load static %}   <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+<!-- Javascript -->
+<script type="text/javascript" src={% static "js/update_script_status.js" %}></script>
+
+<!-- <audio controls>
+    source src="{% static 'sounds/1607.mp3' %}" type="audio/mpeg">
+</audio> -->
+
+{% endblock %}

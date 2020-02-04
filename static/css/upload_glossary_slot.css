@@ -1,0 +1,23 @@
+.file-upload{
+    
+    border-radius: 5px;
+    
+    border-style: solid;
+    border-color: #ced4da;
+    border-width: 1px;
+
+    width: 70%;
+    
+  }
+
+  .file-upload:hover{
+    
+    /* border-color: red; */
+    box-shadow: 0 0 3px #007bff80;
+    border-style: solid;
+    border-color:  #007bffa4;
+    
+
+    
+  }
+

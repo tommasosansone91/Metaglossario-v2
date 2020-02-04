@@ -1,0 +1,70 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<h1>Indice glossario</h1>
+    
+<br>
+
+    <!-- Barra di navigazione  -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- questo fa apparire il pulsantino di ricerca -->
+    
+
+
+{% load static %}   <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+
+
+<!-- visualizzazione glossario intero o risultati ricerca -->
+
+{% if all_entries %}
+
+    {% for entry in all_entries %}
+
+        {% if entry.Admin_approval_switch == "show" %} 
+        <!-- django vuole lo spazio tra gli operatori di uguaglianza o disuguaglianza -->
+
+                <!-- <div class="card"> -->
+                    <!-- <div class="card-body">                          -->
+
+                    {% if entry.Lemma %}  
+                        <p class="card-text"><a href="{% url 'glossario' %}?q={{ entry.Id_statico_entry }}" id="current_lemma" Target= "_blank">{{ entry.Lemma }}</a></p>                           
+                        
+                        
+                        <!-- # intanto mi copia il django tag come url senza trasformarlo nell'elemento
+                        # poi mi funziona solo sul primo elemento in modo cicilico
+                        perchè gli id non si possono sovraporre quindi lo aplica solo al primpo -->
+                    
+                    {% endif %}   
+
+                    
+                    
+                    <!-- # https://stackoverflow.com/a/18828769/7658051 -->                        
+                
+                <!-- </div>         -->
+            <!-- </div>  -->
+            
+            <!-- <br> spazio tra le card -->
+
+        {% endif %} <!--questo if è per pubblicare il contenuto solo se lo switch della review è passata-->
+
+    {% endfor %}
+
+{% endif %}
+
+
+
+<!-- CSS -->
+
+<!-- Javascript -->
+<!-- <script type="text/javascript" src={% static "js/manage_string.js" %}></script>
+<script> concatena_1("current_lemma")</script> -->
+
+
+
+
+
+
+
+{% endblock %}

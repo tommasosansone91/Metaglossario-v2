@@ -1,0 +1,68 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+    <h1>Ringraziamenti</h1>
+    
+    <br>
+
+    <p>Il presente lavoro è un progetto del Politecnico di Milano Dipartimento di Ingegneria Civile e Ambientale (DICA), Sezione Ingegneria dell'acqua (SIA) sviluppato nell'ambito e con il supporto:</p>
+    
+    <ul>
+    
+        <li><p>dell'Accordo di collaborazione per lo scambio di conoscenze in materia di valutazione/gestione del rischio idrogeologico e di protezione civile tra la Regione Lombardia e il Politecnico di Milano (DGR n. X/7240 del 17 ottobre 2017);</p></li>
+        
+        <li><p>del Progetto PON Governance 2014-2020 "Rischio Idrogeologico e idraulico" attraverso la partnership della Fondazione Politecnico di Milano con il Dipartimento della Protezione civile della Presidenza del Consiglio dei Ministri (DPC).</p></li>
+
+        <li><p>del Progetto Interreg Italia-Svizzera GESTI.S.CO. 2018-2021, "GESTIone delle emergenze Senza COnfini".</p></li>
+
+
+    </ul>
+
+    <br><br>
+
+    <p>Il gruppo di lavoro è così composto:</p>
+
+    <ul>
+
+        <li><p>Per Politecnico di Milano Dipartimento DICA, Sezione SIA e Fondazione Politecnico di Milano:</p></li>
+
+        <ul>
+
+            <li><p>Tommaso Sansone: gestione tecnica e operativa del progetto.</p></li>
+
+            <li><p>Giovanni Menduni: responsabile scientifico.</p></li>
+
+            <li><p>Daniele Bignami: responsabile amministrativo e consulenza scientifica.</p></li>
+
+        </ul>
+
+    </ul>
+
+    <br>
+
+  <p>Si ringrazia inoltre la Biblioteca Nazionale Centrale di Firenze per la preziosa consulenza tecnica e scientifica attraverso il contributo di</p></li>
+
+    <ul>
+
+        <li><p>Anna Lucarelli</p></li>
+
+        <li><p>Maria Grazia Pepe</p></li>
+
+    </ul>
+
+    
+
+
+    
+
+
+{% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href={% static "css/about_style.css" %}>
+
+<!-- Javascript -->
+{% comment %} <script type="text/javascript" src={% static "js/file.js" %}></script> {% endcomment %}
+
+{% endblock %}

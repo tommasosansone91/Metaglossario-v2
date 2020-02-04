@@ -1,0 +1,20 @@
+
+/* p:hover{
+
+    background-color: rgb(253, 249, 228); 
+  
+} */
+
+#elemento_bibliografia{
+
+    text-decoration: none;
+    color: black; 
+  
+}
+
+#elemento_bibliografia:hover{
+
+    text-decoration: underline;
+    color:blue;
+  
+}

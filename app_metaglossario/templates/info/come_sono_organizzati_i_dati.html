@@ -1,0 +1,93 @@
+{% extends 'base.html'%} <!-- vuol dire inserisci qui la navigation toolbar contenuta in base -->
+
+{% block content %}
+
+{% load static %}
+
+    <h1>Come sono organizzati i dati</h1>
+    
+    <br>
+
+
+
+
+        <div>
+
+        <p><img src="{% static 'img/differenziazione_terminologia.png' %}" align="right"  style="width:28%; margin:20px;"></p>
+
+        
+            <p>Prima di inserire le informazioni provenienti da un glossario all’interno del database è necessario differenziare e “discretizzare” l’informazione originaria in una serie di campi prestabiliti, ossia delle unità linguistiche. Tale operazione permette all’utente finale di accedere a delle informazioni già organizzate – quindi più comprensibili – e di interrogare il database in maniera precisa per reperire delle informazioni specifiche.</p>
+            <p>Inoltre, per consentire agli utenti di esplorare le affinità e le divergenze di elementi di terminologia provenienti da diverse fonti, le informazioni vengono organizzate nel database secondo una precisa struttura relazionale, che stabilisce le relazioni sussistenti tra le unità linguistiche.</p>
+            <p>Ogni utente tende a differenziare l’informazione originaria in modo diverso e “personale”, cosa che genera disordine nel database e ne riduce l’efficienza. Per questo motivo, il form per l’aggiunta di nuova terminologia riporta indicazioni precise su come compilare ogni campo. Inoltre, è auspicabile che gli utenti prendano visione della struttura relazionale (mostrata di seguito) secondo la quale sono organizzate le unità linguistiche, così da seguirne la logica al momento dell’aggiunta di nuova terminologia.</p>
+                                  
+      
+        </div>
+
+
+
+    <br>
+
+    <h4>Le unità linguistiche</h4>
+    
+    <p>Di seguito sono illustrate le unità linguistiche in cui viene scaglionata l’informazione sorgente:</p>
+    
+    
+    <ul>
+        <li><b>Lemma</b></li>
+        <li><b>Acronimo</b>: Sigla abbreviativa del Lemma.</li>
+        <li><b>Definizione</b></li>
+        <li><b>Autore della definizione</b></li>
+        <li><b>Posizione della definizione nel documento fonte</b>: Riferimento che indichi dove è posizionata la definizione nel documento fonte.</li>
+        <li><b>URL della definizione</b>: URL che rimanda al punto preciso del documento fonte in cui è posizionata la definizione.</li>
+        <li><b>Titolo del documento fonte</b></li>
+        <li><b>Autore del documento fonte</b></li>
+        <li><b>Host del documento fonte</b>: Soggetto che detiene il dominio del sito web su cui è caricato il documento fonte.</li>
+        <li><b>URL del documento fonte</b></li>
+        <li><b>Altro/commento</b>: Questo campo è predisposto soprattutto per accogliere quegli elementi dell’informazione sorgente che non trovano corrispondenza nelle unità linguistiche proposte.</li>
+    </ul>
+
+    <p>Inoltre, il sistema aggiunge automaticamente delle altre unità linguistiche:</p>
+    
+    
+
+    <ul>
+        <li><b>Ambito di appartenenza</b>: Indica il contesto tecnico o operativo in cui si colloca il concetto espresso dalla definizione.</li>
+        <li><b>Data di inserimento</b>: Indica la data in cui l’informazione è stata inserita nel database.</li>
+        <li><b>ID statico</b>: identifica in modo univoco ogni record di informazioni inseriti nel database.</li>
+    </ul>
+
+
+
+    <br>
+
+    <h4>La struttura relazionale</h4>    
+
+    <p>La struttura relazionale indica a quale unità linguistica si riferisce un'altra unità linguistica.</p>
+    
+    <br>
+
+    
+
+    <div style="text-align:center">
+        <img src="{% static 'img/SR_Metaglossario_Gestisco.png' %}" style="width:90%;" align="middle">
+    </div>
+
+    
+
+
+
+    
+
+
+    
+
+
+{% load static %}  <!-- Qui il tag è obbligatorio nonostante sia stato inserito dentro base.html -->
+
+<!-- CSS -->
+{% comment %} <link rel="stylesheet" type="text/css" href={% static "css/file.css" %}> {% endcomment %}
+
+<!-- Javascript -->
+{% comment %} <script type="text/javascript" src={% static "js/file.js" %}></script> {% endcomment %}
+
+{% endblock %}

@@ -1,0 +1,22 @@
+
+
+
+.logo_progetto{
+
+    height:50px;
+    
+}
+
+.border_logo_progetto{
+    
+    border: solid 22px transparent;
+    
+
+}
+
+.border_logo_progetto:hover{
+    
+    background-color:  #008c9e42;
+    
+
+}
